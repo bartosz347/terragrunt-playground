@@ -1,0 +1,6 @@
+.idea
+.terragrunt-cache
+
+terraform.tfvars
+terraform.tfstate*
+.terraform.tfstate.lock.info
