@@ -1,10 +1,15 @@
 include "root" {
-  path = find_in_parent_folders()
+  path   = find_in_parent_folders()
+  expose = true
 }
 
-# Note: in a real life scenario version tag should be used instead of master
+include "env" {
+  path   = "${get_terragrunt_dir()}/../../_env/k8s-cluster.hcl"
+  expose = true
+}
+
 terraform {
-  source = "git::ssh://git@github.com/bartosz347/terraform-playground.git//k8s-digitalocean/k8s-cluster?ref=master"
+  source = "${include.env.locals.source_base_url}?ref=${include.root.locals.ref}"
 }
 
 inputs = {
